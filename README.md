@@ -6,7 +6,7 @@
 1.Apakah pekerja remote bekerja lebih lama daripada pekerja onsite?
 Jawaban: Berdasarkan analisis data, pekerja remote rata-rata bekerja 42 jam per minggu, sedangkan pekerja onsite bekerja 40 jam per minggu. Ini menunjukkan bahwa pekerja remote cenderung bekerja lebih lama.
 
-import pandas as pd
+<pre><code>import pandas as pd
 import plotly.express as px
 
 
@@ -16,7 +16,7 @@ data = pd.read_csv('Impact_of_Remote_Work_on_Mental_Health.csv')  # Ganti 'Impac
 chart = px.pie(data, values='Hours_Worked_Per_Week', names='Work_Location', 
                title='Distribusi Jam Kerja per Minggu: Remote vs Onsite')
 
-chart.show()
+chart.show()</code>
 
 
 ================================
