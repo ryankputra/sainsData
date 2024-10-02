@@ -8,10 +8,10 @@ Jawaban: Berdasarkan analisis data, pekerja remote rata-rata bekerja 42 jam per 
 import pandas as pd
 import plotly.express as px
 
-# Memuat dataset
+
 data = pd.read_csv('Impact_of_Remote_Work_on_Mental_Health.csv')  # Ganti 'Impact_of_Remote_Work_on_Mental_Health.csv' dengan nama file Anda
 
-# Membuat pie chart menggunakan Plotly Express
+
 chart = px.pie(data, values='Hours_Worked_Per_Week', names='Work_Location', 
                title='Distribusi Jam Kerja per Minggu: Remote vs Onsite')
 
@@ -27,20 +27,20 @@ Jawaban: Data menunjukkan bahwa pekerja dengan masalah kesehatan mental memiliki
 import pandas as pd
 import plotly.express as px
 
-# Data
+
 data = {
     'Mental_Health_Condition': ['Dengan Masalah Kesehatan Mental', 'Tanpa Masalah Kesehatan Mental'],
     'Productivity': [70, 85]
 }
 df = pd.DataFrame(data)
 
-# Membuat bar chart menggunakan Plotly Express
+
 chart = px.bar(df, x='Mental_Health_Condition', y='Productivity', 
                title='Produktivitas: Dengan vs Tanpa Masalah Kesehatan Mental',
                labels={'Mental_Health_Condition': 'Masalah Kesehatan Mental', 'Productivity': 'Produktivitas (%)'},
                height=500, width=1000)
 
-# Menampilkan chart
+
 chart.show()
 
 ============================================
@@ -52,17 +52,17 @@ Jawaban: Berdasarkan data yang telah dianalisis, dukungan perusahaan tampaknya m
 import pandas as pd
 import plotly.express as px
 
-# Memuat dataset
+
 data = pd.read_csv('Impact_of_Remote_Work_on_Mental_Health.csv')
 
-# Membuat diagram pie berdasarkan kepuasan kerja remote
+
 fig = px.pie(data, values='Company_Support_for_Remote_Work', 
              names='Satisfaction_with_Remote_Work',
              title='Distribusi Dukungan Perusahaan berdasarkan Kepuasan Kerja Remote',
              labels={'Company_Support_for_Remote_Work': 'Dukungan Perusahaan', 
                      'Satisfaction_with_Remote_Work': 'Kepuasan Kerja Remote'})
 
-# Menampilkan diagram pie
+
 fig.show()
 
 
@@ -75,7 +75,7 @@ Jawaban: Ya, berdasarkan data yang dianalisis, isolasi sosial tampaknya membuat 
 import pandas as pd
 import plotly.express as px
 
-# Memuat dataset
+
 data = pd.read_csv('Impact_of_Remote_Work_on_Mental_Health.csv')  # Ganti 'Impact_of_Remote_Work_on_Mental_Health.csv' dengan nama file Anda
 
 
@@ -94,22 +94,22 @@ jawaban: Berdasarkan grafik batang vertikal yang menunjukkan distribusi nilai ke
 
 import matplotlib.pyplot as plt
 
-# Data yang akan dipetakan
+
 work_life_balance = data['Work_Life_Balance_Rating'].value_counts().sort_index()
 stress_level = data['Stress_Level'].value_counts().sort_index()
 
-# Mengatur ukuran figure
+
 fig = plt.figure(figsize=(10, 6))
 
-# Membuat diagram batang vertikal untuk keseimbangan kerja-hidup
+
 plt.bar(work_life_balance.index, work_life_balance.values, alpha=0.6, label='Keseimbangan Kerja-Hidup')
 
-# Menambahkan judul dan label
+
 plt.title('Pengaruh Keseimbangan Kerja-Hidup terhadap Tingkat Stres')
 plt.xlabel('Rating Keseimbangan Kerja-Hidup')
 plt.ylabel('Jumlah Karyawan')
 
-# Menampilkan chart
+
 plt.legend()
 plt.show()
 
@@ -121,22 +121,22 @@ jawaban: Berdasarkan diagram bar vertikal yang menggambarkan hubungan antara aks
 
 import matplotlib.pyplot as plt
 
-# Data yang diambil dari dataset
+
 akses_mental_health = data['Access_to_Mental_Health_Resources'].value_counts()
 produktivitas = data.groupby('Access_to_Mental_Health_Resources')['Productivity_Change'].value_counts()
 
-# Mengatur ukuran figure
+
 fig = plt.figure(figsize=(10, 6))
 
-# Membuat diagram batang vertikal
+
 plt.bar(akses_mental_health.index, produktivitas.groupby('Access_to_Mental_Health_Resources').sum())
 
-# Menambahkan judul dan label
+
 plt.title('Produktivitas: Dengan vs Tanpa Akses ke Bantuan Kesehatan Mental')
 plt.xlabel('Akses ke Bantuan Kesehatan Mental')
 plt.ylabel('Perubahan Produktivitas')
 
-# Menampilkan diagram
+
 plt.show()
 
 =========================================================
