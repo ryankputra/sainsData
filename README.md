@@ -1,6 +1,6 @@
-================================
+
  #PERTANYAAN 1#
-================================
+
 
 
 1.Apakah pekerja remote bekerja lebih lama daripada pekerja onsite?
