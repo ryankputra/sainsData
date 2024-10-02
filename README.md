@@ -183,10 +183,10 @@ jawab= Berdasarkan hasil diagram, lokasi geografis memengaruhi kepuasan kerja re
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Memuat dataset
+
 data = pd.read_csv('Impact_of_Remote_Work_on_Mental_Health.csv')
 
-# Mengonversi nilai kepuasan kerja ke bentuk numerik
+
 satisfaction_mapping = {
     'Unsatisfied': 0,
     'Neutral': 1,
@@ -195,21 +195,21 @@ satisfaction_mapping = {
 
 data['Satisfaction_with_Remote_Work_Numeric'] = data['Satisfaction_with_Remote_Work'].map(satisfaction_mapping)
 
-# Menghitung rata-rata kepuasan kerja berdasarkan lokasi kerja
+
 average_satisfaction = data.groupby('Work_Location')['Satisfaction_with_Remote_Work_Numeric'].mean()
 
-# Mengatur ukuran figure
+
 plt.figure(figsize=(10, 10))
 
-# Membuat bar horizontal untuk kepuasan kerja berdasarkan lokasi kerja
+
 plt.barh(average_satisfaction.index, average_satisfaction.values)
 
-# Menambahkan judul dan label
+
 plt.title('Kepuasan Kerja Berdasarkan Lokasi Kerja')
 plt.xlabel('Kepuasan Kerja (Skala 0-2)')
 plt.ylabel('Lokasi Kerja')
 
-# Menampilkan plot
+
 plt.show()
 
 
@@ -222,10 +222,9 @@ jawaban=Terdapat korelasi negatif antara jumlah rapat virtual dan produktivitas 
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Memuat dataset
 data = pd.read_csv('Impact_of_Remote_Work_on_Mental_Health.csv')
 
-# Mengonversi kategori perubahan produktivitas menjadi nilai numerik
+
 def convert_productivity_change(value):
     if value == 'Increase':
         return 1
@@ -237,19 +236,19 @@ def convert_productivity_change(value):
 
 data['Productivity_Change_Numeric'] = data['Productivity_Change'].apply(convert_productivity_change)
 
-# Menghitung rata-rata perubahan produktivitas berdasarkan jumlah rapat virtual
+
 average_productivity_change = data.groupby('Number_of_Virtual_Meetings')['Productivity_Change_Numeric'].mean()
 
-# Mengatur ukuran figure
+
 plt.figure(figsize=(10, 10))
 
-# Membuat bar horizontal untuk perubahan produktivitas berdasarkan jumlah rapat virtual
+
 plt.barh(average_productivity_change.index, average_productivity_change.values)
 
-# Menambahkan judul dan label
+
 plt.title('Pengaruh Banyaknya Rapat Virtual terhadap Perubahan Produktivitas')
 plt.xlabel('Perubahan Produktivitas (Rata-Rata)')
 plt.ylabel('Jumlah Rapat Virtual')
 
-# Menampilkan plot
+
 plt.show()
