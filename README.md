@@ -1,6 +1,6 @@
 ================================
-              pertanyaan 1
-================================
+          PERTANYAAN 1
+
 
 1.Apakah pekerja remote bekerja lebih lama daripada pekerja onsite?
 Jawaban: Berdasarkan analisis data, pekerja remote rata-rata bekerja 42 jam per minggu, sedangkan pekerja onsite bekerja 40 jam per minggu. Ini menunjukkan bahwa pekerja remote cenderung bekerja lebih lama.
