@@ -19,9 +19,9 @@ chart = px.pie(data, values='Hours_Worked_Per_Week', names='Work_Location',
 chart.show()
 
 
-==================================================
-                pertanyaan 2
-==================================================
+================================
+ #PERTANYAAN 2#
+================================
 2. Apakah pekerja dengan masalah kesehatan mental produktivitasnya menurun?
 Jawaban: Data menunjukkan bahwa pekerja dengan masalah kesehatan mental memiliki produktivitas rata-rata 70%, sedangkan pekerja tanpa masalah kesehatan mental memiliki produktivitas rata-rata 85%.
 
@@ -44,9 +44,9 @@ chart = px.bar(df, x='Mental_Health_Condition', y='Productivity',
 
 chart.show()
 
-============================================
-              pertanyaan 3
-============================================
+================================
+ #PERTANYAAN 3#
+================================
 3. Bagaimana pengaruh dukungan perusahaan terhadap kepuasan kerja remote?
 Jawaban: Berdasarkan data yang telah dianalisis, dukungan perusahaan tampaknya memiliki pengaruh positif terhadap kepuasan kerja dalam konteks remote. Karyawan yang merasakan dukungan perusahaan lebih besar cenderung melaporkan tingkat kepuasan kerja remote yang lebih tinggi. Hal ini menunjukkan bahwa semakin baik dukungan yang diberikan oleh perusahaan dalam pengaturan kerja remote, semakin puas karyawan dengan pekerjaan mereka.
 
@@ -67,9 +67,9 @@ fig = px.pie(data, values='Company_Support_for_Remote_Work',
 fig.show()
 
 
-==============================================
-              pertanyaan 4
-==============================================
+================================
+ #PERTANYAAN 4#
+================================
 4. Apakah isolasi sosial membuat pekerja merasa lebih stres?
 Jawaban: Ya, berdasarkan data yang dianalisis, isolasi sosial tampaknya membuat pekerja merasa lebih stres. Pekerja yang memiliki tingkat isolasi sosial yang lebih tinggi cenderung melaporkan tingkat stres yang lebih tinggi, menunjukkan adanya korelasi antara isolasi sosial dan tingkat stres.
 
@@ -87,9 +87,9 @@ plt.xlabel('Isolasi Sosial')
 plt.ylabel('Tingkat Stres')
 plt.show()
 
-============================================
-              pertanyaan 5
-============================================
+================================
+ #PERTANYAAN 5#
+================================
 5.Apakah keseimbangan antara kerja dan hidup memengaruhi stres pekerja remote?
 jawaban: Berdasarkan grafik batang vertikal yang menunjukkan distribusi nilai keseimbangan kerja-hidup dan tingkat stres, dapat terlihat bahwa keseimbangan kerja-hidup memang memengaruhi tingkat stres. Karyawan yang melaporkan keseimbangan kerja-hidup yang lebih rendah cenderung melaporkan tingkat stres yang lebih tinggi.
 
@@ -114,9 +114,9 @@ plt.ylabel('Jumlah Karyawan')
 plt.legend()
 plt.show()
 
-=================================================
-                perttanyaan 6
-=================================================
+================================
+ #PERTANYAAN 6#
+================================
 6.Apakah akses ke bantuan kesehatan mental membantu pekerja menjadi lebih produktif?
 jawaban: Berdasarkan diagram bar vertikal yang menggambarkan hubungan antara akses ke bantuan kesehatan mental dan perubahan produktivitas, tampak bahwa pekerja yang memiliki akses ke bantuan kesehatan mental ("Yes") menunjukkan perubahan produktivitas yang lebih rendah dibandingkan dengan mereka yang tidak memiliki akses ("No"). Ini menunjukkan bahwa, meskipun akses ke sumber daya kesehatan mental disediakan, hal itu mungkin tidak selalu berkontribusi secara positif terhadap produktivitas. Ada kemungkinan faktor lain yang mempengaruhi produktivitas, atau bahwa karyawan yang memiliki akses mungkin menghadapi tantangan yang lebih besar yang memengaruhi kinerja mereka.
 
@@ -140,9 +140,9 @@ plt.ylabel('Perubahan Produktivitas')
 
 plt.show()
 
-=========================================================
-                  pertanyaan 7
-=========================================================
+================================
+ #PERTANYAAN 7#
+================================
  7. Apakah olahraga rutin membantu pekerja tidur lebih nyenyak?
 jawaban:Jawaban: Pekerja yang rutin berolahraga memiliki kualitas tidur rata-rata 8 (dari skala 10), sedangkan pekerja yang tidak rutin berolahraga memiliki kualitas tidur rata-rata 6.
 
@@ -163,9 +163,9 @@ plt.ylabel('Kualitas Tidur')
 
 plt.show()
 
-=========================================================
-                    pertanyaan 8
-=========================================================
+================================
+ #PERTANYAAN 8#
+================================
 8. Industri mana yang paling banyak menghadapi masalah kesehatan mental?
 jawab=Industri Healtcare  dan IT memiliki proporsi tertinggi pekerja dengan masalah kesehatan mental sebesar 14,9%
 
@@ -175,9 +175,9 @@ plt.title('Distribusi Masalah Kesehatan Mental Berdasarkan Industri')
 plt.ylabel('')
 plt.show()
 
-=============================================================
-                    pertanyaan 9
-=============================================================
+================================
+ #PERTANYAAN 9#
+================================
 9. Apakah lokasi geografis memengaruhi kepuasan kerja remote?
 jawab= Berdasarkan hasil diagram, lokasi geografis memengaruhi kepuasan kerja remote. Jika beberapa lokasi menunjukkan nilai kepuasan yang lebih tinggi atau lebih rendah, maka lokasi tertentu dapat memberikan kondisi kerja yang lebih baik atau buruk. Namun, jika nilai kepuasan serupa di semua lokasi, maka lokasi geografis tidak memiliki pengaruh signifikan terhadap kepuasan kerja remote.
 
@@ -214,9 +214,9 @@ plt.ylabel('Lokasi Kerja')
 plt.show()
 
 
-=============================================
-              pertanyaan 10
-=============================================
+================================
+ #PERTANYAAN 10#
+================================
 10. Apakah banyaknya rapat virtual memengaruhi produktivitas pekerja?
 jawaban=Terdapat korelasi negatif antara jumlah rapat virtual dan produktivitas dengan koefisien korelasi sebesar -0.05, menunjukkan bahwa semakin banyak rapat virtual, semakin rendah produktivitas.
 
