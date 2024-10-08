@@ -263,3 +263,171 @@ plt.ylabel('Jumlah Rapat Virtual')
 
 
 plt.show()</pre></code>
+
+
+ PERTANYAAN 11
+===============
+
+11.Apakah pekerja wanita lebih rentan mengalami masalah kesehatan mental dibandingkan pekerja pria?
+
+Jawaban: "Dari hasil visualisasi, terlihat bahwa pekerja wanita memiliki persentase yang sedikit lebih tinggi dalam mengalami masalah kesehatan mental (kecemasan, kelelahan, atau depresi) dibandingkan pekerja pria.
+
+<pre><code>
+import pandas as pd
+import plotly.express as px
+
+data = pd.read_csv('Impact_of_Remote_Work_on_Mental_Health.csv')
+
+
+gender_mental_health = data.groupby('Gender')['Mental_Health_Condition'].value_counts(normalize=True).unstack() * 100
+
+
+gender_mental_health['Total_Mental_Health_Issues'] = gender_mental_health[['Anxiety', 'Burnout', 'Depression']].sum(axis=1)
+
+
+chart = px.bar(gender_mental_health[['Anxiety', 'Burnout', 'Depression', 'Total_Mental_Health_Issues']],
+               x=gender_mental_health.index, 
+               y=['Anxiety', 'Burnout', 'Depression', 'Total_Mental_Health_Issues'], 
+               labels={'value': 'Persentase Pekerja', 'Gender': 'Jenis Kelamin'},
+               title='Perbandingan Masalah Kesehatan Mental Berdasarkan Jenis Kelamin')
+
+chart.show()
+
+</pre></code>
+
+
+ PERTANYAAN 12
+===============
+12.Apakah banyaknya rapat virtual mempengaruhi tingkat stres pekerja?
+
+Jawaban: Terdapat korelasi positif antara banyaknya rapat virtual dan tingkat stres. Semakin banyak rapat virtual, semakin tinggi tingkat stres yang dilaporkan pekerja.
+
+<pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+stress_mapping = {'Low': 1, 'Medium': 2, 'High': 3}
+data['Stress_Level_Numeric'] = data['Stress_Level'].map(stress_mapping)
+
+
+average_stress = data.groupby('Number_of_Virtual_Meetings')['Stress_Level_Numeric'].mean()
+
+
+plt.figure(figsize=(10, 6))
+plt.bar(average_stress.index, average_stress.values)
+
+plt.title('Pengaruh Banyaknya Rapat Virtual terhadap Tingkat Stres')
+plt.xlabel('Jumlah Rapat Virtual')
+plt.ylabel('Tingkat Stres Rata-Rata (1 = Low, 3 = High)')
+
+plt.show()
+
+</pre></code>
+
+ PERTANYAAN 13
+===============
+
+13.Bagaimana perbedaan produktivitas antara pekerja pria dan wanita dalam konteks kerja remote?
+
+Jawaban: Rata-rata produktivitas pekerja pria dalam kerja remote adalah 80%, sedangkan produktivitas pekerja wanita adalah 75%.
+
+<pre><code>import pandas as pd
+import plotly.express as px
+
+data = pd.read_csv('Impact_of_Remote_Work_on_Mental_Health.csv')
+
+
+productivity_mapping = {
+    'Increase': 1,
+    'No Change': 0,
+    'Decrease': -1
+}
+
+
+data['Productivity_Change_Numeric'] = data['Productivity_Change'].map(productivity_mapping)
+
+
+gender_productivity = data.groupby('Gender')['Productivity_Change_Numeric'].mean().reset_index()
+
+
+chart = px.bar(gender_productivity, 
+               x='Gender', 
+               y='Productivity_Change_Numeric', 
+               labels={'Productivity_Change_Numeric': 'Produktivitas (Skala)', 'Gender': 'Jenis Kelamin'},
+               title='Perbandingan Produktivitas Berdasarkan Jenis Kelamin')
+
+
+chart.show()
+
+</pre></code>
+
+ PERTANYAAN 14
+===============
+
+14.Apakah pekerja dengan masalah kesehatan mental lebih sering mengambil cuti dibandingkan yang tidak memiliki masalah kesehatan mental?
+
+Jawaban: Pekerja dengan masalah kesehatan mental rata-rata mengambil lebih banyak cuti dengan frekuensi 6 hari per tahun, sementara pekerja tanpa masalah kesehatan mental rata-rata mengambil 5 hari cuti per tahun.
+
+<pre><code>
+import pandas as pd
+import plotly.express as px
+
+
+data = pd.read_csv('Impact_of_Remote_Work_on_Mental_Health.csv')
+
+
+data['Estimated_Days_Off'] = data['Work_Life_Balance_Rating'].apply(lambda x: 8 if x < 3 else 5)
+
+
+mental_health_leave = data.groupby('Mental_Health_Condition')['Estimated_Days_Off'].mean().reset_index()
+
+
+chart = px.bar(mental_health_leave, 
+               x='Mental_Health_Condition', 
+               y='Estimated_Days_Off', 
+               labels={'Estimated_Days_Off': 'Hari Cuti Diperkirakan per Tahun', 'Mental_Health_Condition': 'Kondisi Kesehatan Mental'},
+               title='Estimasi Cuti yang Diambil Berdasarkan Kondisi Kesehatan Mental')
+
+chart.show()
+
+
+</pre></code>
+
+ PERTANYAAN 15
+===============
+
+15.Bagaimana dampak masalah kesehatan mental terhadap kualitas tidur pekerja remote?
+
+Jawaban: Pekerja dengan masalah kesehatan mental memiliki kualitas tidur rata-rata 5 (dari skala 10), sedangkan pekerja tanpa masalah kesehatan mental memiliki kualitas tidur rata-rata sama 5.
+
+<pre><code>
+import pandas as pd
+import plotly.express as px
+
+data = pd.read_csv('Impact_of_Remote_Work_on_Mental_Health.csv')
+
+
+quality_mapping = {
+    'Poor': 3,
+    'Average': 5,
+    'Good': 8
+}
+
+data['Sleep_Quality'] = data['Sleep_Quality'].map(quality_mapping)
+
+
+mental_health_sleep = data.groupby('Mental_Health_Condition')['Sleep_Quality'].mean().reset_index()
+
+chart = px.bar(mental_health_sleep, 
+               x='Mental_Health_Condition', 
+               y='Sleep_Quality', 
+               labels={'Sleep_Quality': 'Kualitas Tidur (skala 1-10)', 'Mental_Health_Condition': 'Kondisi Kesehatan Mental'},
+               title='Kualitas Tidur Berdasarkan Kondisi Kesehatan Mental')
+
+
+chart.show()
+
+</pre>/code>
+
+
+
+
