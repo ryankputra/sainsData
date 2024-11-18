@@ -9,9 +9,8 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras import backend as K
 
-# Path ke dataset
 train_dir = '/home/ryan2/Documents/cifar10/train'  # Pastikan path ini sesuai
-test_dir = '/home/ryan2/Documents/cifar10/test'    # Pastikan path ini sesuai
+test_dir = '/home/ryan2/Documents/cifar10/test' 
 
 # Inisialisasi ImageDataGenerator untuk preprocessing dan augmentasi data
 train_datagen = ImageDataGenerator(rescale=1./255,
@@ -33,7 +32,7 @@ train_generator = train_datagen.flow_from_directory(
 )
 
 test_generator = test_datagen.flow_from_directory(
-    test_dir,  # Ganti train_dir menjadi test_dir di sini
+    test_dir,
     target_size=(32, 32),
     batch_size=64,
     class_mode='categorical'
@@ -42,7 +41,6 @@ test_generator = test_datagen.flow_from_directory(
 # ukuran input berdasarkan gambar yang dimuat
 input_shape = (32, 32, 3)
 
-# Fungsi untuk membuat model
 def createModel():
     model = Sequential()
     model.add(Conv2D(32, (3, 3), padding='same', activation='relu', input_shape=input_shape))
@@ -61,54 +59,29 @@ def createModel():
     model.add(Dropout(0.4))
 
     model.add(Flatten())
-    model.add(Dense(512, activation='relu'))  # Perbaiki parameter Dense yang salah
+    model.add(Dense(512, activation='relu'))
     model.add(Dropout(0.5))
     model.add(Dense(128, activation='relu'))
-    model.add(Dense(10, activation='softmax'))  # Perbaiki penulisan 'activition' menjadi 'activation'
-    
+    model.add(Dense(10, activation='softmax'))  # Perbaikan penulisan
+
     return model
 
-# Inisialisasi dan kompilasi model
+# Membuat dan melatih model
 model = createModel()
+
+# Kompilasi model
 model.compile(optimizer=Adam(), loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Melatih model menggunakan generator data
 hist = model.fit(
     train_generator,
-    steps_per_epoch=train_generator.samples // train_generator.batch_size,
-    epochs=25,
+    steps_per_epoch=train_generator.samples // 64,
+    epochs=10,  # Anda bisa menyesuaikan jumlah epoch
     validation_data=test_generator,
-    validation_steps=test_generator.samples // test_generator.batch_size
+    validation_steps=test_generator.samples // 64
 )
 
 # Evaluasi testing
-score = model.evaluate(test_generator, steps=test_generator.samples // test_generator.batch_size)
+score = model.evaluate(test_generator, steps=test_generator.samples // 64)
 print("Accuracy: ", score[1] * 100, "%")
-
-# Fungsi untuk prediksi
-def predict():
-    some_random_number = np.random.randint(low=0, high=len(test_generator)-1, size=4)
-    sample_images, sample_labels = [], []
-
-    for i in some_random_number:
-        img, label = test_generator[i]
-        sample_images.append(img)
-        sample_labels.append(label)
-    
-    sample_images = np.array(sample_images)
-    predicted = model.predict(sample_images)
-    predicted = np.argmax(predicted, axis=1)
-    true_label = np.argmax(sample_labels, axis=1)
-
-    fig, axs = plt.subplots(2, 2)
-    for row in range(2):
-        for col in range(2):
-            true = true_label[row * 2 + col]
-            pred = predicted[row * 2 + col]
-            axs[row, col].imshow(sample_images[row * 2 + col][0])
-            axs[row, col].set_title('True: %s\nPredicted: %s' % (true, pred))  # Gantilah dict_label jika diperlukan
-            axs[row, col].axis('off')
-
-    plt.show()
-
-predict()
+plt.show()
