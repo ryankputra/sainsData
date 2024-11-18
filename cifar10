@@ -1,0 +1,114 @@
+#import library yang diperlukan
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras import backend as K
+
+# Path ke dataset
+train_dir = '/home/ryan2/Documents/cifar10/train'  # Pastikan path ini sesuai
+test_dir = '/home/ryan2/Documents/cifar10/test'    # Pastikan path ini sesuai
+
+# Inisialisasi ImageDataGenerator untuk preprocessing dan augmentasi data
+train_datagen = ImageDataGenerator(rescale=1./255,
+                                   rotation_range=20,
+                                   width_shift_range=0.2,
+                                   height_shift_range=0.2,
+                                   shear_range=0.2,
+                                   zoom_range=0.2,
+                                   horizontal_flip=True,
+                                   fill_mode='nearest')
+
+test_datagen = ImageDataGenerator(rescale=1./255)
+
+train_generator = train_datagen.flow_from_directory(
+    train_dir,
+    target_size=(32, 32),
+    batch_size=64,
+    class_mode='categorical'
+)
+
+test_generator = test_datagen.flow_from_directory(
+    test_dir,  # Ganti train_dir menjadi test_dir di sini
+    target_size=(32, 32),
+    batch_size=64,
+    class_mode='categorical'
+)
+
+# ukuran input berdasarkan gambar yang dimuat
+input_shape = (32, 32, 3)
+
+# Fungsi untuk membuat model
+def createModel():
+    model = Sequential()
+    model.add(Conv2D(32, (3, 3), padding='same', activation='relu', input_shape=input_shape))
+    model.add(Conv2D(32, (3, 3), activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.2))
+    
+    model.add(Conv2D(64, (3, 3), padding='same', activation='relu'))
+    model.add(Conv2D(64, (3, 3), activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.3))
+
+    model.add(Conv2D(128, (3, 3), padding='same', activation='relu'))
+    model.add(Conv2D(128, (3, 3), activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.4))
+
+    model.add(Flatten())
+    model.add(Dense(512, activation='relu'))  # Perbaiki parameter Dense yang salah
+    model.add(Dropout(0.5))
+    model.add(Dense(128, activation='relu'))
+    model.add(Dense(10, activation='softmax'))  # Perbaiki penulisan 'activition' menjadi 'activation'
+    
+    return model
+
+# Inisialisasi dan kompilasi model
+model = createModel()
+model.compile(optimizer=Adam(), loss='categorical_crossentropy', metrics=['accuracy'])
+
+# Melatih model menggunakan generator data
+hist = model.fit(
+    train_generator,
+    steps_per_epoch=train_generator.samples // train_generator.batch_size,
+    epochs=25,
+    validation_data=test_generator,
+    validation_steps=test_generator.samples // test_generator.batch_size
+)
+
+# Evaluasi testing
+score = model.evaluate(test_generator, steps=test_generator.samples // test_generator.batch_size)
+print("Accuracy: ", score[1] * 100, "%")
+
+# Fungsi untuk prediksi
+def predict():
+    some_random_number = np.random.randint(low=0, high=len(test_generator)-1, size=4)
+    sample_images, sample_labels = [], []
+
+    for i in some_random_number:
+        img, label = test_generator[i]
+        sample_images.append(img)
+        sample_labels.append(label)
+    
+    sample_images = np.array(sample_images)
+    predicted = model.predict(sample_images)
+    predicted = np.argmax(predicted, axis=1)
+    true_label = np.argmax(sample_labels, axis=1)
+
+    fig, axs = plt.subplots(2, 2)
+    for row in range(2):
+        for col in range(2):
+            true = true_label[row * 2 + col]
+            pred = predicted[row * 2 + col]
+            axs[row, col].imshow(sample_images[row * 2 + col][0])
+            axs[row, col].set_title('True: %s\nPredicted: %s' % (true, pred))  # Gantilah dict_label jika diperlukan
+            axs[row, col].axis('off')
+
+    plt.show()
+
+predict()
